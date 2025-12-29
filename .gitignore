@@ -1,5 +1,7 @@
-# ignore backend for now
+# ignore backend (not ready yet)
 backend/
+
+# ignore UI references / mockups
 ui-example/
 
 # node stuff
