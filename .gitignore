@@ -1,0 +1,6 @@
+# ignore backend for now
+backend/
+
+# node stuff
+node_modules/
+.env
