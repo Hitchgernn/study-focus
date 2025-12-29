@@ -1,5 +1,6 @@
 # ignore backend for now
 backend/
+ui-example/
 
 # node stuff
 node_modules/
