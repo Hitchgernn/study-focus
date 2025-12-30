@@ -23,6 +23,10 @@ app.use(express.json());
 app.use('/session', sessionRoutes);
 app.use('/session', reportRoutes);
 
+app.get('/', (_req, res) => {
+  res.send('Focus Guardian API is running');
+});
+
 app.use((err: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   // Fallback error handler to avoid leaking stack traces.
   console.error(err);
