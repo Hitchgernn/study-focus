@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Session {
+  id                  String        @id @default(uuid())
+  title               String
+  description         String?
+  plannedDurationSec  Int
+  startedAt           DateTime      @default(now())
+  endedAt             DateTime?
+  metrics             FocusMetric[]
+  distractions        Distraction[]
+}
+
+model FocusMetric {
+  id                  String   @id @default(uuid())
+  sessionId           String
+  timestamp           DateTime @default(now())
+  avgFocusScore       Int
+  productiveSeconds   Int
+  unproductiveSeconds Int
+
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, timestamp])
+}
+
+model Distraction {
+  id        String  @id @default(uuid())
+  sessionId String
+  type      String
+  count     Int
+
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+
+  @@index([sessionId, type])
+}
